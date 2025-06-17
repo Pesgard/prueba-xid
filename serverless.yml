@@ -1,6 +1,6 @@
-service: report-processor-api
+service: report-processor-api-v6
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws
@@ -8,11 +8,11 @@ provider:
   region: ${opt:region, 'us-east-1'}
   stage: ${opt:stage, 'dev'}
   memorySize: 512
-  timeout: 30
+  timeout: 28
   environment:
     STAGE: ${self:provider.stage}
-    UPLOADS_BUCKET: ${self:custom.uploadsBucket}
-    RESULTS_BUCKET: ${self:custom.resultsBucket}
+    UPLOADS_BUCKET: !Ref UploadsBucket
+    RESULTS_BUCKET: !Ref ResultsBucket
   iam:
     role:
       statements:
@@ -22,31 +22,27 @@ provider:
             - s3:PutObject
             - s3:DeleteObject
           Resource:
-            - arn:aws:s3:::${self:custom.uploadsBucket}/*
-            - arn:aws:s3:::${self:custom.resultsBucket}/*
+            - !Sub "arn:aws:s3:::${UploadsBucket}/*"
+            - !Sub "arn:aws:s3:::${ResultsBucket}/*"
 
 plugins:
-  - serverless-esbuild
   - serverless-offline
 
-custom:
-  uploadsBucket: ${self:service}-uploads-${self:provider.stage}
-  resultsBucket: ${self:service}-results-${self:provider.stage}
+build:
   esbuild:
     bundle: true
     minify: false
     sourcemap: true
     exclude:
       - aws-sdk
-    target: node18
-    define:
-      require.resolve: undefined
-    platform: node
-    concurrency: 10
+    target: node20
+
+# No necesitamos custom buckets - AWS generará nombres únicos automáticamente
 
 functions:
   createReport:
-    handler: dist/handlers/createReportHandler.handler
+    handler: src/handlers/createReportHandler.handler
+    timeout: 29
     events:
       - http:
           path: reports
@@ -54,16 +50,17 @@ functions:
           cors: true
 
   processCSV:
-    handler: dist/handlers/processCsvHandler.handler
+    handler: src/handlers/processCsvHandler.handler
     timeout: 300
     events:
       - s3:
-          bucket: ${self:custom.uploadsBucket}
+          bucket: !Ref UploadsBucket
           event: s3:ObjectCreated:*
-          existing: false
+          existing: true
 
   getReport:
-    handler: dist/handlers/getReportHandler.handler
+    handler: src/handlers/getReportHandler.handler
+    timeout: 29
     events:
       - http:
           path: reports/{reportId}
@@ -75,7 +72,6 @@ resources:
     UploadsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:custom.uploadsBucket}
         CorsConfiguration:
           CorsRules:
             - AllowedHeaders:
@@ -93,7 +89,6 @@ resources:
     ResultsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:custom.resultsBucket}
         CorsConfiguration:
           CorsRules:
             - AllowedHeaders:
@@ -106,4 +101,17 @@ resources:
                 - HEAD
               AllowedOrigins:
                 - "*"
-              MaxAge: 3000 
+              MaxAge: 3000
+
+
+
+  Outputs:
+    UploadsBucketName:
+      Value: !Ref UploadsBucket
+      Export:
+        Name: ${self:service}-${self:provider.stage}-uploads-bucket
+    
+    ResultsBucketName:
+      Value: !Ref ResultsBucket
+      Export:
+        Name: ${self:service}-${self:provider.stage}-results-bucket

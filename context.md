@@ -8,7 +8,7 @@ Este proyecto implementa un sistema automatizado para la carga, procesamiento y 
 
 Permitir a los usuarios subir archivos CSV con datos de ventas, procesarlos de forma asíncrona y obtener un resumen filtrado en formato JSON.
 
-### Ejemplo de flujo:
+### Ejemplo de flujo
 
 1. El cliente solicita una URL para subir un archivo CSV.
 2. Sube el archivo usando una URL pre-firmada de S3.
@@ -20,16 +20,17 @@ Permitir a los usuarios subir archivos CSV con datos de ventas, procesarlos de f
 
 ## 🎓 Tecnologías y Herramientas
 
-* **Lenguaje**: TypeScript
-* **Cloud Provider**: AWS
-* **Infraestructura**: Serverless Framework
-* **Componentes AWS**:
+- **Lenguaje**: TypeScript
+- **Cloud Provider**: AWS
+- **Infraestructura**: Serverless Framework
+- **Componentes AWS**:
 
-  * API Gateway
-  * Lambda
-  * S3 (2 buckets: uploads y results)
-* **Inyección de dependencias**: InversifyJS
-* **Testing**: Jest
+  - API Gateway
+  - Lambda
+  - S3 (2 buckets: uploads y results)
+
+- **Inyección de dependencias**: InversifyJS
+- **Testing**: Jest
 
 ---
 
@@ -37,8 +38,8 @@ Permitir a los usuarios subir archivos CSV con datos de ventas, procesarlos de f
 
 ### 1. `POST /reports`
 
-* Genera un `reportId` y una URL pre-firmada para subir el CSV.
-* Respuesta:
+- Genera un `reportId` y una URL pre-firmada para subir el CSV.
+- Respuesta:
 
 ```json
 {
@@ -49,19 +50,19 @@ Permitir a los usuarios subir archivos CSV con datos de ventas, procesarlos de f
 
 ### 2. S3 Trigger - `processCsvFile`
 
-* Se ejecuta cuando se sube un archivo.
-* Lógica:
+- Se ejecuta cuando se sube un archivo.
+- Lógica:
 
-  * Lee el CSV
-  * Filtra productos con `quantity > 10`
-  * Calcula `total_price`
-  * Genera JSON con resumen y guarda en bucket de resultados
+  - Lee el CSV
+  - Filtra productos con `quantity > 10`
+  - Calcula `total_price`
+  - Genera JSON con resumen y guarda en bucket de resultados
 
 ### 3. `GET /reports/{reportId}`
 
-* Verifica si el JSON ya está listo
-* Si está, devuelve una URL pre-firmada para descarga
-* Si no, devuelve 202 (procesando) o 404 (no encontrado)
+- Verifica si el JSON ya está listo
+- Si está, devuelve una URL pre-firmada para descarga
+- Si no, devuelve 202 (procesando) o 404 (no encontrado)
 
 ---
 
@@ -87,8 +88,20 @@ src/
     "processedAt": "2025-06-16T14:30:00Z"
   },
   "items": [
-    { "product_id": "102", "product_name": "Mouse Gamer", "quantity": 25, "price": 75.00, "total_price": 1875.00 },
-    { "product_id": "103", "product_name": "Teclado Mecánico", "quantity": 15, "price": 110.25, "total_price": 1653.75 }
+    {
+      "product_id": "102",
+      "product_name": "Mouse Gamer",
+      "quantity": 25,
+      "price": 75.0,
+      "total_price": 1875.0
+    },
+    {
+      "product_id": "103",
+      "product_name": "Teclado Mecánico",
+      "quantity": 15,
+      "price": 110.25,
+      "total_price": 1653.75
+    }
   ],
   "summary": {
     "totalItems": 2,
@@ -101,21 +114,21 @@ src/
 
 ## ⚖️ Principios de Diseño
 
-* Arquitectura limpia y modular.
-* Principios SOLID.
-* Lógica de negocio completamente testeada.
-* Inyección de dependencias para aislar infraestructuras.
+- Arquitectura limpia y modular.
+- Principios SOLID.
+- Lógica de negocio completamente testeada.
+- Inyección de dependencias para aislar infraestructuras.
 
 ---
 
 ## ✅ Roadmap
 
-* [x] Definición del flujo y arquitectura
-* [ ] Implementar `POST /reports`
-* [ ] Lambda para procesamiento
-* [ ] Implementar `GET /reports/{reportId}`
-* [ ] Tests de negocio
-* [ ] Deploy con Serverless
+- [x] Definición del flujo y arquitectura
+- [ ] Implementar `POST /reports`
+- [ ] Lambda para procesamiento
+- [ ] Implementar `GET /reports/{reportId}`
+- [ ] Tests de negocio
+- [ ] Deploy con Serverless
 
 ---
 

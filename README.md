@@ -36,6 +36,7 @@ src/
 Creates a new report and returns an upload URL.
 
 **Request:**
+
 ```json
 {
   "fileName": "sales-data.csv"
@@ -43,6 +44,7 @@ Creates a new report and returns an upload URL.
 ```
 
 **Response:**
+
 ```json
 {
   "reportId": "uuid-here",
@@ -75,16 +77,19 @@ Checks report status and provides download URL if ready.
 ### Installation
 
 1. **Install dependencies:**
+
 ```bash
 npm install
 ```
 
 2. **Build the project:**
+
 ```bash
 npm run build
 ```
 
 3. **Deploy to AWS:**
+
 ```bash
 npm run deploy:dev
 ```
@@ -92,11 +97,13 @@ npm run deploy:dev
 ## 🧪 Testing
 
 Run tests with coverage:
+
 ```bash
 npm run test:coverage
 ```
 
 Watch mode for development:
+
 ```bash
 npm run test:watch
 ```
@@ -104,6 +111,7 @@ npm run test:watch
 ## 📊 CSV Format
 
 Expected CSV format:
+
 ```csv
 product_id,product_name,quantity,price
 101,Laptop Pro,5,1200.00
@@ -114,6 +122,7 @@ product_id,product_name,quantity,price
 ## 📄 Output Format
 
 Processed JSON report:
+
 ```json
 {
   "metadata": {
@@ -161,16 +170,19 @@ The following environment variables are automatically set by Serverless Framewor
 ## 🚀 Deployment
 
 ### Development
+
 ```bash
 npm run deploy:dev
 ```
 
 ### Production
+
 ```bash
 npm run deploy:prod
 ```
 
 ### Remove Stack
+
 ```bash
 npm run remove
 ```

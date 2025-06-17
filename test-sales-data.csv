@@ -1,0 +1,26 @@
+product_id,product_name,quantity,price
+001,Laptop Gaming,15,1299.99
+002,Mouse Inalámbrico,8,45.50
+003,Teclado RGB,25,89.90
+004,Monitor 24",12,299.00
+005,Auriculares Gaming,5,120.00
+006,Webcam 4K,30,199.50
+007,Tablet 10",3,450.00
+008,Smartphone Premium,18,899.99
+009,Cargador Rápido,50,29.99
+010,Disco SSD 500GB,22,85.00
+011,Memoria RAM 16GB,9,180.00
+012,Tarjeta Gráfica,2,650.00
+013,Procesador Intel,14,320.00
+014,Placa Base,6,220.00
+015,Fuente de Poder,11,95.00
+016,Gabinete RGB,7,75.00
+017,Cooler CPU,35,60.00
+018,Cable HDMI,45,15.99
+019,Hub USB,28,25.50
+020,Adaptador WiFi,40,35.00
+021,Micrófono USB,13,85.00
+022,Parlantes 2.1,16,120.00
+023,Pad Mouse,60,12.99
+024,Soporte Monitor,19,45.00
+025,Luz LED Escritorio,33,38.50 

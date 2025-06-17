@@ -4,7 +4,7 @@
   "description": "Serverless API for processing CSV sales reports with Clean Architecture",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "echo 'Build handled by Serverless v4 automatically'",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
