@@ -1,0 +1,109 @@
+service: report-processor-api
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'dev'}
+  memorySize: 512
+  timeout: 30
+  environment:
+    STAGE: ${self:provider.stage}
+    UPLOADS_BUCKET: ${self:custom.uploadsBucket}
+    RESULTS_BUCKET: ${self:custom.resultsBucket}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+            - s3:DeleteObject
+          Resource:
+            - arn:aws:s3:::${self:custom.uploadsBucket}/*
+            - arn:aws:s3:::${self:custom.resultsBucket}/*
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+custom:
+  uploadsBucket: ${self:service}-uploads-${self:provider.stage}
+  resultsBucket: ${self:service}-results-${self:provider.stage}
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude:
+      - aws-sdk
+    target: node18
+    define:
+      require.resolve: undefined
+    platform: node
+    concurrency: 10
+
+functions:
+  createReport:
+    handler: dist/handlers/createReportHandler.handler
+    events:
+      - http:
+          path: reports
+          method: post
+          cors: true
+
+  processCSV:
+    handler: dist/handlers/processCsvHandler.handler
+    timeout: 300
+    events:
+      - s3:
+          bucket: ${self:custom.uploadsBucket}
+          event: s3:ObjectCreated:*
+          existing: false
+
+  getReport:
+    handler: dist/handlers/getReportHandler.handler
+    events:
+      - http:
+          path: reports/{reportId}
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    UploadsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.uploadsBucket}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              AllowedOrigins:
+                - "*"
+              MaxAge: 3000
+
+    ResultsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.resultsBucket}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              AllowedOrigins:
+                - "*"
+              MaxAge: 3000 

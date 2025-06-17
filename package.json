@@ -1,0 +1,50 @@
+{
+  "name": "report-processor-api",
+  "version": "1.0.0",
+  "description": "Serverless API for processing CSV sales reports with Clean Architecture",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "deploy": "serverless deploy",
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:prod": "serverless deploy --stage prod",
+    "invoke:local": "serverless invoke local",
+    "logs": "serverless logs",
+    "remove": "serverless remove"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.828.0",
+    "@aws-sdk/s3-request-presigner": "^3.828.0",
+    "aws-lambda": "^1.0.7",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.5.0",
+    "inversify": "^7.5.2",
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^11.1.0"
+  },
+  "keywords": [
+    "serverless",
+    "aws",
+    "lambda",
+    "typescript",
+    "clean-architecture",
+    "csv-processing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.149",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^24.0.1",
+    "@types/uuid": "^10.0.0",
+    "jest": "^30.0.0",
+    "serverless": "^4.17.0",
+    "serverless-esbuild": "^1.55.1",
+    "serverless-offline": "^14.4.0",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
+  }
+}
