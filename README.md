@@ -137,6 +137,11 @@ npm run test:coverage
 npm run test:watch
 ```
 
+### Cobertura de los tests:
+
+<img width="790" alt="image" src="https://github.com/user-attachments/assets/4155c4b9-178f-43d1-b8a3-e361af95b587" />
+
+
 ## 📋 Uso de la API
 
 ### **Endpoints Disponibles**
