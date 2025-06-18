@@ -7,7 +7,7 @@ export interface DownloadUrlResponse {
   downloadUrl: string;
 }
 
-export interface FileRepository {
+export interface IFileRepository {
   generateUploadUrl(reportId: string, fileName: string): Promise<UploadUrlResponse>;
   generateDownloadUrl(reportId: string): Promise<DownloadUrlResponse>;
   fileExists(reportId: string): Promise<boolean>;

@@ -1,7 +1,7 @@
 import { S3Event } from 'aws-lambda';
-import { container } from '../config/container';
-import { ProcessCsvUseCase } from '../application/usecases/ProcessCsvUseCase';
-import { TYPES } from '../config/types';
+import { container } from '../../config/container';
+import { ProcessCsvUseCase } from '../../application/usecases/ProcessCsvUseCase';
+import { TYPES } from '../../config/types';
 
 export async function handler(event: S3Event): Promise<void> {
   try {

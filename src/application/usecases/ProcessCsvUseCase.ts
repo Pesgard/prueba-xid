@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
-import { FileRepository } from '../../domain/repositories/FileRepository';
-import { CsvProcessor } from '../../domain/services/CsvProcessor';
+import { IFileRepository } from '../../domain/interfaces/IFileRepository';
+import { ICsvProcessor } from '../../domain/interfaces/ICsvProcessor';
 import { Report } from '../../domain/entities/Report';
 import { TYPES } from '../../config/types';
 
@@ -12,8 +12,8 @@ export interface ProcessCsvRequest {
 @injectable()
 export class ProcessCsvUseCase {
   constructor(
-    @inject(TYPES.FileRepository) private fileRepository: FileRepository,
-    @inject(TYPES.CsvProcessor) private csvProcessor: CsvProcessor
+    @inject(TYPES.IFileRepository) private fileRepository: IFileRepository,
+    @inject(TYPES.ICsvProcessor) private csvProcessor: ICsvProcessor
   ) {}
 
   async execute(request: ProcessCsvRequest): Promise<void> {

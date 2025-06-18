@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "reportId": "5ad236a4-712f-48fb-a03f-06013c03aeff",
+    "processedAt": "2025-06-18T00:38:19.711Z"
+  },
+  "items": [
+    {
+      "product_id": "102",
+      "product_name": "Mouse Gamer",
+      "quantity": 25,
+      "price": 75,
+      "total_price": 1875
+    },
+    {
+      "product_id": "103",
+      "product_name": "Teclado Mecánico",
+      "quantity": 15,
+      "price": 110.25,
+      "total_price": 1653.75
+    },
+    {
+      "product_id": "105",
+      "product_name": "Webcam HD",
+      "quantity": 30,
+      "price": 89.99,
+      "total_price": 2699.7
+    },
+    {
+      "product_id": "106",
+      "product_name": "Auriculares Bluetooth",
+      "quantity": 12,
+      "price": 199.5,
+      "total_price": 2394
+    },
+    {
+      "product_id": "108",
+      "product_name": "Smartphone",
+      "quantity": 20,
+      "price": 699.99,
+      "total_price": 13999.8
+    },
+    {
+      "product_id": "109",
+      "product_name": "Cargador Inalámbrico",
+      "quantity": 45,
+      "price": 35,
+      "total_price": 1575
+    },
+    {
+      "product_id": "110",
+      "product_name": "Disco SSD 1TB",
+      "quantity": 18,
+      "price": 120,
+      "total_price": 2160
+    }
+  ],
+  "summary": {
+    "totalItems": 7,
+    "grandTotal": 26357.25
+  }
+}

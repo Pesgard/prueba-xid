@@ -1,5 +1,5 @@
 import { injectable, inject } from 'inversify';
-import { FileRepository } from '../../domain/repositories/FileRepository';
+import { IFileRepository } from '../../domain/interfaces/IFileRepository';
 import { TYPES } from '../../config/types';
 
 export interface GetReportRequest {
@@ -14,7 +14,7 @@ export interface GetReportResponse {
 @injectable()
 export class GetReportUseCase {
   constructor(
-    @inject(TYPES.FileRepository) private fileRepository: FileRepository
+    @inject(TYPES.IFileRepository) private fileRepository: IFileRepository
   ) {}
 
   async execute(request: GetReportRequest): Promise<GetReportResponse> {

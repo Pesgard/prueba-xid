@@ -1,10 +1,10 @@
 import { injectable } from 'inversify';
 import { S3Client, GetObjectCommand, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { FileRepository, UploadUrlResponse, DownloadUrlResponse } from '../../domain/repositories/FileRepository';
+import { IFileRepository, UploadUrlResponse, DownloadUrlResponse } from '../../domain/interfaces/IFileRepository';
 
 @injectable()
-export class S3FileRepository implements FileRepository {
+export class AwsS3FileRepository implements IFileRepository {
   private s3Client: S3Client;
   private uploadsBucket: string;
   private resultsBucket: string;

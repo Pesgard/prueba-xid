@@ -1,9 +1,9 @@
 export const TYPES = {
   // Repositories
-  FileRepository: Symbol.for('FileRepository'),
+  IFileRepository: Symbol.for('IFileRepository'),
   
   // Services
-  CsvProcessor: Symbol.for('CsvProcessor'),
+  ICsvProcessor: Symbol.for('ICsvProcessor'),
   
   // Use Cases
   CreateReportUseCase: Symbol.for('CreateReportUseCase'),

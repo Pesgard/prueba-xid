@@ -1,4 +1,4 @@
-service: report-processor-api-v6
+service: report-processor-api-v7
 
 frameworkVersion: '4'
 
@@ -41,7 +41,7 @@ build:
 
 functions:
   createReport:
-    handler: src/handlers/createReportHandler.handler
+    handler: src/interfaces/lambda/createReportHandler.handler
     timeout: 29
     events:
       - http:
@@ -50,7 +50,7 @@ functions:
           cors: true
 
   processCSV:
-    handler: src/handlers/processCsvHandler.handler
+    handler: src/interfaces/lambda/processCsvHandler.handler
     timeout: 300
     events:
       - s3:
@@ -59,7 +59,7 @@ functions:
           existing: true
 
   getReport:
-    handler: src/handlers/getReportHandler.handler
+    handler: src/interfaces/lambda/getReportHandler.handler
     timeout: 29
     events:
       - http:

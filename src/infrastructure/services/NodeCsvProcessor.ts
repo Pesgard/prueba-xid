@@ -1,11 +1,11 @@
 import { injectable } from 'inversify';
 import csv from 'csv-parser';
 import { Readable } from 'stream';
-import { CsvProcessor } from '../../domain/services/CsvProcessor';
+import { ICsvProcessor } from '../../domain/interfaces/ICsvProcessor';
 import { SalesItem } from '../../domain/entities/Report';
 
 @injectable()
-export class CsvProcessorImpl implements CsvProcessor {
+export class NodeCsvProcessor implements ICsvProcessor {
   async parseCsv(csvContent: string): Promise<SalesItem[]> {
     return new Promise((resolve, reject) => {
       const results: SalesItem[] = [];

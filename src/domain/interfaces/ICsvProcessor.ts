@@ -1,5 +1,5 @@
 import { SalesItem } from '../entities/Report';
 
-export interface CsvProcessor {
+export interface ICsvProcessor {
   parseCsv(csvContent: string): Promise<SalesItem[]>;
 } 

@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { container } from '../config/container';
-import { CreateReportUseCase } from '../application/usecases/CreateReportUseCase';
-import { TYPES } from '../config/types';
+import { container } from '../../config/container';
+import { CreateReportUseCase } from '../../application/usecases/CreateReportUseCase';
+import { TYPES } from '../../config/types';
 
 export async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   try {

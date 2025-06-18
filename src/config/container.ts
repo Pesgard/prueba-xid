@@ -3,12 +3,12 @@ import { Container } from 'inversify';
 import { TYPES } from './types';
 
 // Domain interfaces
-import { FileRepository } from '../domain/repositories/FileRepository';
-import { CsvProcessor } from '../domain/services/CsvProcessor';
+import { IFileRepository } from '../domain/interfaces/IFileRepository';
+import { ICsvProcessor } from '../domain/interfaces/ICsvProcessor';
 
 // Infrastructure implementations
-import { S3FileRepository } from '../infrastructure/repositories/S3FileRepository';
-import { CsvProcessorImpl } from '../infrastructure/services/CsvProcessorImpl';
+import { AwsS3FileRepository } from '../infrastructure/repositories/AwsS3FileRepository';
+import { NodeCsvProcessor } from '../infrastructure/services/NodeCsvProcessor';
 
 // Application use cases
 import { CreateReportUseCase } from '../application/usecases/CreateReportUseCase';
@@ -18,10 +18,10 @@ import { GetReportUseCase } from '../application/usecases/GetReportUseCase';
 const container = new Container();
 
 // Bind repositories
-container.bind<FileRepository>(TYPES.FileRepository).to(S3FileRepository);
+container.bind<IFileRepository>(TYPES.IFileRepository).to(AwsS3FileRepository);
 
 // Bind services
-container.bind<CsvProcessor>(TYPES.CsvProcessor).to(CsvProcessorImpl);
+container.bind<ICsvProcessor>(TYPES.ICsvProcessor).to(NodeCsvProcessor);
 
 // Bind use cases
 container.bind<CreateReportUseCase>(TYPES.CreateReportUseCase).to(CreateReportUseCase);

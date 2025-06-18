@@ -1,5 +1,5 @@
 import { injectable, inject } from 'inversify';
-import { FileRepository } from '../../domain/repositories/FileRepository';
+import { IFileRepository } from '../../domain/interfaces/IFileRepository';
 import { Report } from '../../domain/entities/Report';
 import { TYPES } from '../../config/types';
 
@@ -15,7 +15,7 @@ export interface CreateReportResponse {
 @injectable()
 export class CreateReportUseCase {
   constructor(
-    @inject(TYPES.FileRepository) private fileRepository: FileRepository
+    @inject(TYPES.IFileRepository) private fileRepository: IFileRepository
   ) {}
 
   async execute(request: CreateReportRequest): Promise<CreateReportResponse> {

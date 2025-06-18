@@ -1,0 +1,21 @@
+meta {
+  name: crear reporte
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://3fb9millhg.execute-api.us-east-1.amazonaws.com/dev/reports
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "fileName": "sample-sales-data.csv"
+  }
+}
+
+body:file {
+  file: @file(/Users/esgard/Development/prueba-xid/examples/sample-sales-data.csv) @contentType(text/csv; charset=utf-8)
+}
